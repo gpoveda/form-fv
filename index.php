@@ -1,6 +1,5 @@
 <?php
 
-use PHPMailer\PHPMailer\PHPMailer;
 
 
 $connect = mysqli_connect('localhost', 'usb', 'usb2022', 'formulatio');
