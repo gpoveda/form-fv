@@ -100,14 +100,14 @@ Message: '.$_POST['email'];
 
         <form method="post" action="">
         
-            Email Address:
+            Direccion de correo:
             <br>
             <input type="text" name="email" value="<?php echo $email; ?>">
             <?php echo $email_error; ?>
 
             <br><br>
 
-            Message:
+            Mensaje:
             <br>
             <textarea name="message"><?php echo $message; ?></textarea>
             <?php echo $message_error; ?>
