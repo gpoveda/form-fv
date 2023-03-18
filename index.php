@@ -4,9 +4,12 @@
     <head>
         <title>Contacto Brayan Rojas</title>
         <link rel="stylesheet" type="text/css" href="estilos.css">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </head>
     <body>
     <?php
+
+    
 
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
@@ -36,6 +39,7 @@
 		} catch (Exception $e) {
 			echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
 		}
+        
 $user ='root';
 $pass ='';
 $host ='localhost';
@@ -53,13 +57,13 @@ if (count($_POST))
 
     if ($_POST['email'] == '')
     {
-        $email_error = 'Please enter an email address';
+        $email_error = 'Porfavor ingrese un email';
         $errors ++;
     }
 
     if ($_POST['message'] == '')
     {
-        $message_error = 'Please enter a message';
+        $message_error = 'Porfavor ingrese un mensaje';
         $errors ++;
     }
 
@@ -107,10 +111,14 @@ Message: '.$_POST['email'];
             <br>
             <textarea name="message"><?php echo $message; ?></textarea>
             <?php echo $message_error; ?>
+            <div class="mb-3">
+                <div class="g-recaptcha" data-sitekey=6Lc-UQ8lAAAAAF7z_2Oqpnc5EdjijhL0ZkmeK63g></div>
+            </div>
 
             <br><br>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Enviar">
+            
         
         </form>
     
