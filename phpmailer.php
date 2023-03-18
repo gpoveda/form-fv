@@ -6,22 +6,21 @@ require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
  
-$mail = new PHPMailer(true);
+$mail = new PHPMailer();
 try {
-    $mail->SMTPDebug = 2;  // Sacar esta línea para no mostrar salida debug
-    $mail->isSMTP();
-    $mail->Host = 'smtp.mailtrap.io';  // Host de conexión SMTP
-    $mail->SMTPAuth = true;
-    $mail->Username = 'ba9d3c500569ab';                 // Usuario SMTP
-    $mail->Password = '7aca4a6f4cc000';                           // Password SMTP
-    $mail->SMTPSecure = 'tls';                            // Activar seguridad TLS
-    $mail->Port = 587;                                    // Puerto SMTP
+    $phpmailer = new PHPMailer();
+    $phpmailer->isSMTP();
+    $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->Port = 2525;
+    $phpmailer->Username = 'fb3a7c0e06c979';
+    $phpmailer->Password = '9df314138321d6';                                  // Puerto SMTP
 
     #$mail->SMTPOptions = ['ssl'=> ['allow_self_signed' => true]];  // Descomentar si el servidor SMTP tiene un certificado autofirmado
     #$mail->SMTPSecure = false;				// Descomentar si se requiere desactivar cifrado (se suele usar en conjunto con la siguiente línea)
     #$mail->SMTPAutoTLS = false;			// Descomentar si se requiere desactivar completamente TLS (sin cifrado)
  
-    $mail->setFrom('remitente@midominio.com');		// Mail del remitente
+    $mail->setFrom('bnrojasp@academia.usbbog.edu.co');		// Mail del remitente
     $mail->addAddress('destinatario@gmail.com');     // Mail del destinatario
  
     $mail->isHTML(true);

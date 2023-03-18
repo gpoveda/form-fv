@@ -1,9 +1,7 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
-
-
-$connect = mysqli_connect('localhost', 'usb', 'usb2022', 'formulatio');
+$connect = mysqli_connect('localhost', '', '', 'contact');
 
 $email = isset( $_POST['email'] ) ? $_POST['email'] : '';
 $message = isset( $_POST['message'] ) ? $_POST['message'] : '';
@@ -12,7 +10,7 @@ $email_error = '';
 $message_error = '';
 
 if (count($_POST))
-{ 
+{
     $errors = 0;
 
     if ($_POST['email'] == '')

@@ -1,9 +1,46 @@
-<?php
 
+<!doctype html>
+<html>
+    <head>
+        <title>Contacto Brayan Rojas</title>
+        <link rel="stylesheet" type="text/css" href="estilos.css">
+    </head>
+    <body>
+    <?php
 
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
 
-$connect = mysqli_connect('localhost', 'usb', 'usb2022', 'formulatio');
+        require 'phpmailer/src/Exception.php';
+        require 'phpmailer/src/PHPMailer.php';
+        require 'phpmailer/src/SMTP.php';
+		$email = isset( $_POST['email'] ) ? $_POST['email'] : '';
+		$mensaje = isset( $_POST['message'] ) ? $_POST['message'] : '';
+		$mail = new PHPMailer(true);
+		try {
+			$mail->isSMTP();
+			$mail->Host = 'sandbox.smtp.mailtrap.io'; 
+			$mail->SMTPAuth = true;
+			$mail->Username = 'fb3a7c0e06c979';
+            $mail->Password = '9df314138321d6'; 
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+			$mail->Port = 2525;
+			$mail->setFrom('nirock6@gmail.com', 'Formulario de contacto'); 
+			$mail->addAddress('destinatario@dominio.com', 'Destinatario'); 
+			$mail->isHTML(true);
+			$mail->Subject = 'Formulario de contacto';
+			$mail->Body = "<br>Email: $email<br>Mensaje: $mensaje";
+			$mail->AltBody = "\nEmail: $email\nMensaje: $mensaje";
+			$mail->send();
+			echo '<p>El mensaje ha sido enviado correctamente.</p>';
+		} catch (Exception $e) {
+			echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
+		}
+$user ='root';
+$pass ='';
+$host ='localhost';
 
+$connect = mysqli_connect($host, $user, $pass,'contact');
 $email = isset( $_POST['email'] ) ? $_POST['email'] : '';
 $message = isset( $_POST['message'] ) ? $_POST['message'] : '';
 
@@ -54,14 +91,8 @@ Message: '.$_POST['email'];
 }
 
 ?>
-<!doctype html>
-<html>
-    <head>
-        <title>PHP Contact Form</title>
-    </head>
-    <body>
     
-        <h1>PHP Contact Form</h1>
+        <h1>Contacto Brayan Rojas</h1>
 
         <form method="post" action="">
         
