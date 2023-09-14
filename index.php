@@ -1,9 +1,50 @@
-<?php
 
+<!doctype html>
+<html>
+    <head>
+        <title>Contacto Brayan Rojas</title>
+        <link rel="stylesheet" type="text/css" href="estilos.css">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </head>
+    <body>
+    <?php
 
+    
 
-$connect = mysqli_connect('localhost', 'usb', 'usb2022', 'formulatio');
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
 
+        require 'phpmailer/src/Exception.php';
+        require 'phpmailer/src/PHPMailer.php';
+        require 'phpmailer/src/SMTP.php';
+		$email = isset( $_POST['email'] ) ? $_POST['email'] : '';
+		$mensaje = isset( $_POST['message'] ) ? $_POST['message'] : '';
+		$mail = new PHPMailer(true);
+		try {
+			$mail->isSMTP();
+			$mail->Host = 'sandbox.smtp.mailtrap.io'; 
+			$mail->SMTPAuth = true;
+			$mail->Username = 'fb3a7c0e06c979';
+            $mail->Password = '9df314138321d6'; 
+			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+			$mail->Port = 2525;
+			$mail->setFrom('nirock6@gmail.com', 'Formulario de contacto'); 
+			$mail->addAddress('destinatario@dominio.com', 'Destinatario'); 
+			$mail->isHTML(true);
+			$mail->Subject = 'Formulario de contacto';
+			$mail->Body = "<br>Email: $email<br>Mensaje: $mensaje";
+			$mail->AltBody = "\nEmail: $email\nMensaje: $mensaje";
+			$mail->send();
+			echo '<p>El mensaje ha sido enviado correctamente.</p>';
+		} catch (Exception $e) {
+			echo "Error al enviar el mensaje: {$mail->ErrorInfo}";
+		}
+        
+$user ='root';
+$pass ='';
+$host ='localhost';
+
+$connect = mysqli_connect($host, $user, $pass,'contact');
 $email = isset( $_POST['email'] ) ? $_POST['email'] : '';
 $message = isset( $_POST['message'] ) ? $_POST['message'] : '';
 
@@ -16,13 +57,13 @@ if (count($_POST))
 
     if ($_POST['email'] == '')
     {
-        $email_error = 'Please enter an email address';
+        $email_error = 'Porfavor ingrese un email';
         $errors ++;
     }
 
     if ($_POST['message'] == '')
     {
-        $message_error = 'Please enter a message';
+        $message_error = 'Porfavor ingrese un mensaje';
         $errors ++;
     }
 
@@ -54,32 +95,30 @@ Message: '.$_POST['email'];
 }
 
 ?>
-<!doctype html>
-<html>
-    <head>
-        <title>PHP Contact Form</title>
-    </head>
-    <body>
     
-        <h1>PHP Contact Form</h1>
+        <h1>Contacto Brayan Rojas</h1>
 
         <form method="post" action="">
         
-            Email Address:
+            Direccion de correo:
             <br>
             <input type="text" name="email" value="<?php echo $email; ?>">
             <?php echo $email_error; ?>
 
             <br><br>
 
-            Message:
+            Mensaje:
             <br>
             <textarea name="message"><?php echo $message; ?></textarea>
             <?php echo $message_error; ?>
+            <div class="mb-3">
+                <div class="g-recaptcha" data-sitekey=6Lc-UQ8lAAAAAF7z_2Oqpnc5EdjijhL0ZkmeK63g></div>
+            </div>
 
             <br><br>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Enviar">
+            
         
         </form>
     
